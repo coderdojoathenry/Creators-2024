@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://dg8okqw73epry"]
+
+[ext_resource type="PhysicsMaterial" uid="uid://de3ppoqr3uqjd" path="res://materials/ball_physics.tres" id="1_akw2w"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="2_51fcs"]
+[ext_resource type="Material" uid="uid://d2hfl6qvn03me" path="res://materials/ball.tres" id="2_pmo0g"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_3s4ol"]
+radius = 0.1
+
+[sub_resource type="SphereMesh" id="SphereMesh_1kdpt"]
+radius = 0.1
+height = 0.2
+
+[node name="Player" type="RigidBody3D"]
+physics_material_override = ExtResource("1_akw2w")
+script = ExtResource("2_51fcs")
+Power = 10.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_3s4ol")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+material_override = ExtResource("2_pmo0g")
+mesh = SubResource("SphereMesh_1kdpt")
