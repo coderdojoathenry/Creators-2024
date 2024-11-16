@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://q87t4dsl0a1f"]
+
+[ext_resource type="Texture2D" uid="uid://bg4gxbgffsomc" path="res://textures/checker-1.png" id="1_fbucj"]
+
+[resource]
+albedo_color = Color(0.919321, 0.793925, 0.59726, 1)
+albedo_texture = ExtResource("1_fbucj")
+metallic = 1.0
+roughness = 0.25
