@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://cehymefh50ppb"]
+
+[ext_resource type="Script" path="res://scripts/pickup.gd" id="1_bguon"]
+[ext_resource type="Material" uid="uid://hg4njy6523jn" path="res://materials/pickup.tres" id="2_g4k3r"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_p1rjh"]
+height = 0.2
+radius = 0.05
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_qtjcp"]
+top_radius = 0.03
+bottom_radius = 0.05
+height = 0.2
+
+[node name="Pickup" type="Area3D"]
+script = ExtResource("1_bguon")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.11, 0)
+shape = SubResource("CylinderShape3D_p1rjh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+material_override = ExtResource("2_g4k3r")
+mesh = SubResource("CylinderMesh_qtjcp")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

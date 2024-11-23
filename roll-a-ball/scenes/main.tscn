@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bqjhccoghmaaa"]
+[gd_scene load_steps=11 format=3 uid="uid://bqjhccoghmaaa"]
 
 [ext_resource type="PackedScene" uid="uid://dbfq75ruyyptr" path="res://scenes/player.tscn" id="1_anf05"]
+[ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_ckgag"]
 [ext_resource type="Material" uid="uid://dh8l27ubtfwox" path="res://materials/ground.tres" id="1_ecquc"]
 [ext_resource type="Material" uid="uid://b6ugok3gy6c87" path="res://materials/walls.tres" id="3_a1mpn"]
+[ext_resource type="PackedScene" uid="uid://cehymefh50ppb" path="res://scenes/pickup.tscn" id="4_ax4qx"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_21tyo"]
 
@@ -18,6 +20,9 @@ size = Vector3(2, 0.3, 0.1)
 size = Vector3(2.2, 0.3, 0.1)
 
 [node name="Main" type="Node3D"]
+
+[node name="Game Manager" type="Node3D" parent="."]
+script = ExtResource("1_ckgag")
 
 [node name="Camera and Lights" type="Node3D" parent="."]
 
@@ -85,3 +90,43 @@ shape = SubResource("BoxShape3D_q14qy")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/Wall3"]
 mesh = SubResource("BoxMesh_rly8x")
 surface_material_override/0 = ExtResource("3_a1mpn")
+
+[node name="Pickup" parent="." instance=ExtResource("4_ax4qx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.521372, -5.96046e-08, -0.2682)
+
+[node name="Pickup2" parent="." instance=ExtResource("4_ax4qx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.509314, -1.19209e-07, 0.0909024)
+
+[node name="Pickup3" parent="." instance=ExtResource("4_ax4qx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.324284, 0, 0.395186)
+
+[node name="Pickup4" parent="." instance=ExtResource("4_ax4qx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.105908, -5.96046e-08, 0.538929)
+
+[node name="Pickup5" parent="." instance=ExtResource("4_ax4qx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.172618, -5.96046e-08, 0.509755)
+
+[node name="Pickup6" parent="." instance=ExtResource("4_ax4qx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.441921, -1.78814e-07, 0.318824)
+
+[node name="Pickup7" parent="." instance=ExtResource("4_ax4qx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.611603, -2.38419e-07, 0.0091911)
+
+[node name="Pickup8" parent="." instance=ExtResource("4_ax4qx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6302, -2.38419e-07, -0.387)
+
+[node name="Pickup9" parent="." instance=ExtResource("4_ax4qx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.355066, -2.38419e-07, -0.659813)
+
+[node name="Pickup10" parent="." instance=ExtResource("4_ax4qx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0153527, -2.38419e-07, -0.690678)
+
+[node name="Pickup11" parent="." instance=ExtResource("4_ax4qx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.335168, -2.38419e-07, -0.620826)
+
+[node name="pickups_count_label" type="Label" parent="."]
+offset_left = 18.0
+offset_top = 18.0
+offset_right = 209.0
+offset_bottom = 41.0
+text = "Pickups Remaining: N"
