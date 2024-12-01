@@ -3,6 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://bg4gxbgffsomc" path="res://textures/checker-1.png" id="1_vwi2l"]
 
 [resource]
-albedo_color = Color(0.873522, 0.154862, 0.539217, 1)
+albedo_color = Color(0.856671, 0.393529, 0.78109, 1)
 albedo_texture = ExtResource("1_vwi2l")
-uv1_scale = Vector3(5, 5, 5)
+uv1_scale = Vector3(3, 3, 3)

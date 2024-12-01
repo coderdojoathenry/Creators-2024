@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dbfq75ruyyptr"]
+[gd_scene load_steps=7 format=3 uid="uid://dbfq75ruyyptr"]
 
 [ext_resource type="PhysicsMaterial" uid="uid://de3ppoqr3uqjd" path="res://materials/ball_physics.tres" id="1_q07pg"]
 [ext_resource type="Material" uid="uid://q87t4dsl0a1f" path="res://materials/ball.tres" id="2_hjw5p"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="2_tulbi"]
+[ext_resource type="AudioStream" uid="uid://c8khw421h2l34" path="res://Audio/705735__samuel54tw__pickup_coin.wav" id="4_etx8t"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_3s4ol"]
 radius = 0.1
@@ -12,6 +13,7 @@ radius = 0.1
 height = 0.2
 
 [node name="Player" type="RigidBody3D"]
+collision_layer = 2
 physics_material_override = ExtResource("1_q07pg")
 script = ExtResource("2_tulbi")
 power = 10.0
@@ -22,3 +24,6 @@ shape = SubResource("SphereShape3D_3s4ol")
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 material_override = ExtResource("2_hjw5p")
 mesh = SubResource("SphereMesh_1kdpt")
+
+[node name="Sound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_etx8t")

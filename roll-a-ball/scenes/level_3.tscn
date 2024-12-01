@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://c8kfjygwer6mb"]
+
+[ext_resource type="Script" path="res://scripts/level.gd" id="1_kon7d"]
+[ext_resource type="PackedScene" uid="uid://cehymefh50ppb" path="res://scenes/pickup.tscn" id="1_th6u1"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_w48x3"]
+
+[node name="Level 3" type="Node3D"]
+script = ExtResource("1_kon7d")
+target_seconds = 16.0
+
+[node name="Pickup" parent="." instance=ExtResource("1_th6u1")]
+transform = Transform3D(0.999997, 0, -0.00240855, 0, 1, 0, 0.00240855, 0, 0.999997, -0.129975, -5.96046e-08, 0.12812)
+
+[node name="Pickup2" parent="." instance=ExtResource("1_th6u1")]
+transform = Transform3D(0.999996, 0, 0.00280998, 0, 1, 0, -0.00280998, 0, 0.999996, -0.145117, -1.19209e-07, -0.189592)
+
+[node name="Pickup3" parent="." instance=ExtResource("1_th6u1")]
+transform = Transform3D(0.999996, 0, 0.00280998, 0, 1, 0, -0.00280998, 0, 0.999996, -0.474785, 0, -0.180736)
+
+[node name="Pickup4" parent="." instance=ExtResource("1_th6u1")]
+transform = Transform3D(0.999996, 0, 0.00280998, 0, 1, 0, -0.00280998, 0, 0.999996, 0.0809967, -5.96046e-08, -0.494495)
+
+[node name="Pickup5" parent="." instance=ExtResource("1_th6u1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.463071, -5.96046e-08, 0.420974)
+
+[node name="Pickup6" parent="." instance=ExtResource("1_th6u1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.470087, -1.78814e-07, 0.128631)
+
+[node name="Pickup7" parent="." instance=ExtResource("1_th6u1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.123953, -2.38419e-07, 0.406941)
+
+[node name="Pickup8" parent="." instance=ExtResource("1_th6u1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.498152, -2.38419e-07, -0.493475)
+
+[node name="Bounds" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00233865, 0, -0.0023388)
+mesh = SubResource("PlaneMesh_w48x3")

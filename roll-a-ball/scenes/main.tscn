@@ -1,10 +1,15 @@
-[gd_scene load_steps=11 format=3 uid="uid://bqjhccoghmaaa"]
+[gd_scene load_steps=16 format=3 uid="uid://bqjhccoghmaaa"]
 
 [ext_resource type="PackedScene" uid="uid://dbfq75ruyyptr" path="res://scenes/player.tscn" id="1_anf05"]
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_ckgag"]
 [ext_resource type="Material" uid="uid://dh8l27ubtfwox" path="res://materials/ground.tres" id="1_ecquc"]
+[ext_resource type="PackedScene" uid="uid://c8kfjygwer6mb" path="res://scenes/level_3.tscn" id="2_3p877"]
+[ext_resource type="PackedScene" uid="uid://xik444m5n7oh" path="res://scenes/level_2.tscn" id="2_eal81"]
+[ext_resource type="PackedScene" uid="uid://odd4bcaw1eg8" path="res://scenes/level_1.tscn" id="2_qkaxd"]
+[ext_resource type="PackedScene" uid="uid://cjf6a3g7w7shy" path="res://scenes/level_4.tscn" id="2_ycnec"]
 [ext_resource type="Material" uid="uid://b6ugok3gy6c87" path="res://materials/walls.tres" id="3_a1mpn"]
-[ext_resource type="PackedScene" uid="uid://cehymefh50ppb" path="res://scenes/pickup.tscn" id="4_ax4qx"]
+[ext_resource type="AudioStream" uid="uid://cg1gd0ocvbhre" path="res://Audio/awesomeness.wav" id="6_ipy8q"]
+[ext_resource type="FontFile" uid="uid://dxr44xbojr7lq" path="res://Fonts/Super Childish.ttf" id="6_lj2vq"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_21tyo"]
 
@@ -23,15 +28,101 @@ size = Vector3(2.2, 0.3, 0.1)
 
 [node name="Game Manager" type="Node3D" parent="."]
 script = ExtResource("1_ckgag")
+level = Array[PackedScene]([ExtResource("2_qkaxd"), ExtResource("2_eal81"), ExtResource("2_3p877"), ExtResource("2_ycnec")])
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="pickups_count_label" type="Label" parent="UI"]
+layout_mode = 1
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 187.0
+offset_bottom = 43.0
+theme_override_fonts/font = ExtResource("6_lj2vq")
+theme_override_font_sizes/font_size = 36
+text = "Pickups Remaining: N"
+
+[node name="time_remaining_label" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -390.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 64.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("6_lj2vq")
+theme_override_font_sizes/font_size = 36
+text = "Time Remaining: NN.NNs"
+
+[node name="game_over_label" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -83.5
+offset_top = -11.5
+offset_right = 83.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_lj2vq")
+theme_override_font_sizes/font_size = 48
+text = "Game Over. Restart?"
+
+[node name="restart_button" type="Button" parent="UI/game_over_label"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = 70.0
+offset_right = 150.0
+offset_bottom = 190.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_lj2vq")
+theme_override_font_sizes/font_size = 48
+text = "Restart"
+
+[node name="GameSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_ipy8q")
+autoplay = true
 
 [node name="Camera and Lights" type="Node3D" parent="."]
 
 [node name="Camera3D" type="Camera3D" parent="Camera and Lights"]
-transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 1.5, 1.5, 1.5)
+transform = Transform3D(0.707107, -0.353553, 0.612372, 0, 0.866026, 0.5, -0.707107, -0.353553, 0.612372, 1.5, 1.2, 1.5)
+fov = 50.0
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Camera and Lights"]
-transform = Transform3D(1, 0, 0, 0, 0.851892, 0.523718, 0, -0.523718, 0.851892, 0, 0, 0)
+[node name="Sun" type="DirectionalLight3D" parent="Camera and Lights"]
+transform = Transform3D(1, 0, 0, 0, 0.866026, 0.5, 0, -0.5, 0.866026, 0, 0, 0)
 shadow_enabled = true
+
+[node name="Fill" type="DirectionalLight3D" parent="Camera and Lights"]
+transform = Transform3D(-0.5, -0.433013, 0.75, 0, 0.866026, 0.5, -0.866025, 0.25, -0.433013, 0, 0, 0)
+light_color = Color(0.804475, 0.899233, 0.955191, 1)
+light_energy = 0.3
+shadow_enabled = true
+sky_mode = 1
+
+[node name="Rim" type="DirectionalLight3D" parent="Camera and Lights"]
+transform = Transform3D(-0.5, 0.433013, -0.75, 0, 0.866026, 0.5, 0.866025, 0.25, -0.433013, 0, 0, 0)
+light_color = Color(0.910935, 0.8743, 0.944405, 1)
+light_energy = 0.3
+shadow_enabled = true
+sky_mode = 1
 
 [node name="Player" parent="." instance=ExtResource("1_anf05")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.661789, 0)
@@ -91,42 +182,4 @@ shape = SubResource("BoxShape3D_q14qy")
 mesh = SubResource("BoxMesh_rly8x")
 surface_material_override/0 = ExtResource("3_a1mpn")
 
-[node name="Pickup" parent="." instance=ExtResource("4_ax4qx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.521372, -5.96046e-08, -0.2682)
-
-[node name="Pickup2" parent="." instance=ExtResource("4_ax4qx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.509314, -1.19209e-07, 0.0909024)
-
-[node name="Pickup3" parent="." instance=ExtResource("4_ax4qx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.324284, 0, 0.395186)
-
-[node name="Pickup4" parent="." instance=ExtResource("4_ax4qx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.105908, -5.96046e-08, 0.538929)
-
-[node name="Pickup5" parent="." instance=ExtResource("4_ax4qx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.172618, -5.96046e-08, 0.509755)
-
-[node name="Pickup6" parent="." instance=ExtResource("4_ax4qx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.441921, -1.78814e-07, 0.318824)
-
-[node name="Pickup7" parent="." instance=ExtResource("4_ax4qx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.611603, -2.38419e-07, 0.0091911)
-
-[node name="Pickup8" parent="." instance=ExtResource("4_ax4qx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6302, -2.38419e-07, -0.387)
-
-[node name="Pickup9" parent="." instance=ExtResource("4_ax4qx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.355066, -2.38419e-07, -0.659813)
-
-[node name="Pickup10" parent="." instance=ExtResource("4_ax4qx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0153527, -2.38419e-07, -0.690678)
-
-[node name="Pickup11" parent="." instance=ExtResource("4_ax4qx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.335168, -2.38419e-07, -0.620826)
-
-[node name="pickups_count_label" type="Label" parent="."]
-offset_left = 18.0
-offset_top = 18.0
-offset_right = 209.0
-offset_bottom = 41.0
-text = "Pickups Remaining: N"
+[connection signal="pressed" from="UI/game_over_label/restart_button" to="Game Manager" method="_on_restart_button_pressed"]

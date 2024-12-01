@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=3 uid="uid://xik444m5n7oh"]
+
+[ext_resource type="PackedScene" uid="uid://cehymefh50ppb" path="res://scenes/pickup.tscn" id="1_5y6fu"]
+[ext_resource type="Script" path="res://scripts/level.gd" id="1_7omgd"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_w48x3"]
+
+[node name="Level 2" type="Node3D"]
+script = ExtResource("1_7omgd")
+target_seconds = 22.0
+
+[node name="Pickup" parent="." instance=ExtResource("1_5y6fu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.617261, -5.96046e-08, -0.307959)
+
+[node name="Pickup2" parent="." instance=ExtResource("1_5y6fu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.621574, -1.19209e-07, 0.0768699)
+
+[node name="Pickup3" parent="." instance=ExtResource("1_5y6fu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.417834, 0, 0.385831)
+
+[node name="Pickup4" parent="." instance=ExtResource("1_5y6fu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0825206, -5.96046e-08, 0.576349)
+
+[node name="Pickup5" parent="." instance=ExtResource("1_5y6fu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.254474, -5.96046e-08, 0.498061)
+
+[node name="Pickup6" parent="." instance=ExtResource("1_5y6fu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.289114, -1.78814e-07, 0.203218)
+
+[node name="Pickup7" parent="." instance=ExtResource("1_5y6fu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0107087, -2.38419e-07, 0.00461577)
+
+[node name="Pickup8" parent="." instance=ExtResource("1_5y6fu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.737782, -2.38419e-07, -0.85241)
+
+[node name="Pickup9" parent="." instance=ExtResource("1_5y6fu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.345711, -2.38419e-07, -0.835219)
+
+[node name="Pickup10" parent="." instance=ExtResource("1_5y6fu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0103736, -2.38419e-07, -0.774873)
+
+[node name="Pickup11" parent="." instance=ExtResource("1_5y6fu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.335168, -2.38419e-07, -0.620826)
+
+[node name="Bounds" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_w48x3")
