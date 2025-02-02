@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Ship
 
 @export var speed_by_distance : float = 10.0
 

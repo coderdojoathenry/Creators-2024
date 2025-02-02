@@ -1,8 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://daj431lewf2ne"]
+[gd_scene load_steps=12 format=3 uid="uid://daj431lewf2ne"]
 
+[ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_byx63"]
 [ext_resource type="Script" path="res://scripts/ship.gd" id="1_p8vr1"]
 [ext_resource type="Texture2D" uid="uid://cgaemfwu7ygfw" path="res://textures/ship.png" id="2_cubkv"]
 [ext_resource type="Script" path="res://scripts/mouse_hider.gd" id="3_2qat4"]
+[ext_resource type="Script" path="res://scripts/kill_ship.gd" id="5_ivnkj"]
+[ext_resource type="Script" path="res://scripts/mover2.gd" id="6_usmwp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5wkk7"]
 radius = 16.0
@@ -16,13 +19,23 @@ size = Vector2(10, 588)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iancb"]
 size = Vector2(100, 100)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_n60yv"]
+radius = 16.0
+
 [node name="Main" type="Node2D"]
+
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("ship")]
+unique_name_in_owner = true
+script = ExtResource("1_byx63")
+ship = NodePath("../Ship")
 
 [node name="MouseHider" type="Node2D" parent="."]
 script = ExtResource("3_2qat4")
 
 [node name="Ship" type="CharacterBody2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(576, 324)
+collision_layer = 2
 script = ExtResource("1_p8vr1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ship"]
@@ -57,9 +70,31 @@ shape = SubResource("RectangleShape2D_igmsx")
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(76, 326)
+collision_layer = 4
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_iancb")
+
+[node name="KillShip" type="Node2D" parent="Area2D"]
+script = ExtResource("5_ivnkj")
+
+[node name="Enemy" type="Area2D" parent="."]
+position = Vector2(61, 136)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
+shape = SubResource("CircleShape2D_n60yv")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Enemy"]
+modulate = Color(0.958618, 0.348605, 0.250832, 1)
+texture = ExtResource("2_cubkv")
+
+[node name="Mover" type="Node2D" parent="Enemy"]
+script = ExtResource("6_usmwp")
+speed = 100.0
+direction = Vector2(1, 0)
+change_at_min = 2.0
+change_at_max = 4.0
 
 [connection signal="body_entered" from="Area2D" to="Ship" method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="Ship" method="_on_area_2d_body_exited"]
