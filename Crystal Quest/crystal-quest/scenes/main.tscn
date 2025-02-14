@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://daj431lewf2ne"]
+[gd_scene load_steps=14 format=3 uid="uid://daj431lewf2ne"]
 
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_6go2g"]
 [ext_resource type="Script" path="res://scripts/ship.gd" id="1_p8vr1"]
 [ext_resource type="Texture2D" uid="uid://cgaemfwu7ygfw" path="res://textures/ship.png" id="2_cubkv"]
 [ext_resource type="Script" path="res://scripts/mouse_hider.gd" id="3_2qat4"]
-[ext_resource type="Script" path="res://scripts/ship_killer.gd" id="5_glavl"]
+[ext_resource type="Texture2D" uid="uid://c4t2nk0wjvdub" path="res://textures/ememy0.png" id="6_2a22y"]
+[ext_resource type="Script" path="res://scripts/mover.gd" id="7_wwbeg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5wkk7"]
 radius = 16.0
@@ -15,8 +16,30 @@ size = Vector2(1152, 10)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_igmsx"]
 size = Vector2(10, 588)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_iancb"]
-size = Vector2(100, 100)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d3l7h"]
+size = Vector2(32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x4b4j"]
+atlas = ExtResource("6_2a22y")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_esewx"]
+atlas = ExtResource("6_2a22y")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_28nxh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x4b4j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_esewx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
 
 [node name="Main" type="Node2D"]
 
@@ -62,11 +85,20 @@ position = Vector2(1152, 359)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Right Wall"]
 shape = SubResource("RectangleShape2D_igmsx")
 
-[node name="ShipKiller" type="Area2D" parent="."]
-position = Vector2(76, 326)
-script = ExtResource("5_glavl")
+[node name="Enemy0" type="Area2D" parent="."]
+position = Vector2(75, 349)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ShipKiller"]
-shape = SubResource("RectangleShape2D_iancb")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy0"]
+shape = SubResource("RectangleShape2D_d3l7h")
 
-[connection signal="body_entered" from="ShipKiller" to="ShipKiller" method="_on_body_entered"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Enemy0"]
+sprite_frames = SubResource("SpriteFrames_28nxh")
+autoplay = "default"
+frame_progress = 0.019718
+
+[node name="Mover" type="Node2D" parent="Enemy0"]
+script = ExtResource("7_wwbeg")
+direction = Vector2(1, 0)
+speed = 200.0
+wander_time_min = 1.0
+wander_time_max = 3.0
