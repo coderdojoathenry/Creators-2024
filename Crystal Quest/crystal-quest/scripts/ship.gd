@@ -1,8 +1,29 @@
 extends CharacterBody2D
 
 @export var speed_by_distance : float = 10.0
+@export var missile_scene : PackedScene
+@export var min_time_between_missiles : float = 0.1
 
 const DEADZONE : float = 10.0
+const MISSILE_OFFSET : int = 32
+
+var missile_countdown : float = 0
+
+func _process(delta: float) -> void:
+	missile_countdown -= delta
+	
+	if (Input.is_action_just_pressed("Shoot") && missile_countdown < 0):
+		var new_missile = missile_scene.instantiate() as Missile
+
+		new_missile.direction = velocity.normalized()
+		if (new_missile.direction == Vector2.ZERO):
+			new_missile.direction = Vector2.UP
+			
+		new_missile.position = position + \
+							   new_missile.direction * MISSILE_OFFSET
+		
+		get_parent().add_child(new_missile)
+		missile_countdown = min_time_between_missiles
 
 func _physics_process(delta: float) -> void:
 	var mouse_pos : Vector2 = get_viewport().get_mouse_position()
