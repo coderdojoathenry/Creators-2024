@@ -4,6 +4,7 @@ extends Node2D
 @export var speed : float
 @export var wander_time_min : float
 @export var wander_time_max : float
+@export var border : Border
 
 var parent : Node2D
 var vp_rect : Rect2
@@ -33,13 +34,24 @@ func _process(delta: float) -> void:
 	parent.position += direction.normalized() * speed * delta
 
 func correct_dir_for_bounds() -> void:
-	if (direction.x < 0 && parent.position.x < 0):
+	var top = 0
+	var bottom = 0
+	var left = 0
+	var right = 0
+	
+	if (border):
+		top = border.Top
+		bottom = border.Bottom
+		left = border.Left
+		right = border.Right
+	
+	if (direction.x < 0 && parent.position.x < left):
 		direction.x = 1
-	if (direction.x > 0 && parent.position.x > vp_rect.size.x):
+	if (direction.x > 0 && parent.position.x > vp_rect.size.x - right):
 		direction.x = -1
-	if (direction.y < 0 && parent.position.y < 0):
+	if (direction.y < 0 && parent.position.y < top):
 		direction.y = 1
-	if (direction.y > 0 && parent.position.y > vp_rect.size.y):
+	if (direction.y > 0 && parent.position.y > vp_rect.size.y - bottom):
 		direction.y = -1
 
 func pick_random_direction() -> void:

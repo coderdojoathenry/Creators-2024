@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://daj431lewf2ne"]
+[gd_scene load_steps=16 format=3 uid="uid://daj431lewf2ne"]
 
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_6go2g"]
 [ext_resource type="Script" path="res://scripts/ship.gd" id="1_p8vr1"]
 [ext_resource type="Texture2D" uid="uid://cgaemfwu7ygfw" path="res://textures/ship.png" id="2_cubkv"]
 [ext_resource type="Script" path="res://scripts/mouse_hider.gd" id="3_2qat4"]
 [ext_resource type="Texture2D" uid="uid://c4t2nk0wjvdub" path="res://textures/ememy0.png" id="6_2a22y"]
+[ext_resource type="Script" path="res://scripts/border.gd" id="7_6hxjk"]
 [ext_resource type="Script" path="res://scripts/mover.gd" id="7_wwbeg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5wkk7"]
@@ -40,6 +41,13 @@ animations = [{
 "name": &"default",
 "speed": 2.0
 }]
+
+[sub_resource type="Resource" id="Resource_dbprg"]
+script = ExtResource("7_6hxjk")
+Top = 80
+Bottom = 20
+Left = 20
+Right = 20
 
 [node name="Main" type="Node2D"]
 
@@ -102,3 +110,4 @@ direction = Vector2(1, 0)
 speed = 200.0
 wander_time_min = 1.0
 wander_time_max = 3.0
+border = SubResource("Resource_dbprg")
