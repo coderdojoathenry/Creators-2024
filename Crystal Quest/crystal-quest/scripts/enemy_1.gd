@@ -4,14 +4,13 @@ extends AnimatableBody2D
 @export var speed : float
 @export var wander_time_min : float
 @export var wander_time_max : float
+@export var border : Border
 
-var parent : Node2D
 var vp_rect : Rect2
 var wander_change_dir_time : float
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	parent = get_parent() as Node2D
 	vp_rect = get_viewport_rect() 
 	set_wander_change_dir_time()
 
@@ -20,9 +19,6 @@ func set_wander_change_dir_time() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if (parent == null):
-		return
-	
 	wander_change_dir_time -= delta
 	
 	if (wander_change_dir_time < 0):
@@ -30,16 +26,33 @@ func _process(delta: float) -> void:
 		set_wander_change_dir_time()
 		
 	correct_dir_for_bounds()
-	parent.position += direction.normalized() * speed * delta
+
+func _physics_process(delta):
+	global_position += direction.normalized() * speed * delta
+	var collision = move_and_collide(direction)
+	if (collision):
+		var body = collision.get_collider()
+		%GameManager.inform_body_entered(body)
 
 func correct_dir_for_bounds() -> void:
-	if (direction.x < 0 && parent.position.x < 0):
+	var top : int = 0
+	var bottom : int = 0
+	var left : int = 0
+	var right : int = 0
+	
+	if (border):
+		top = border.Top
+		bottom = border.Bottom
+		left = border.Left
+		right = border.Right
+	
+	if (direction.x < 0 && global_position.x < top):
 		direction.x = 1
-	if (direction.x > 0 && parent.position.x > vp_rect.size.x):
+	if (direction.x > 0 && global_position.x > vp_rect.size.x - bottom):
 		direction.x = -1
-	if (direction.y < 0 && parent.position.y < 0):
+	if (direction.y < 0 && global_position.y < left):
 		direction.y = 1
-	if (direction.y > 0 && parent.position.y > vp_rect.size.y):
+	if (direction.y > 0 && global_position.y > vp_rect.size.y - right):
 		direction.y = -1
 
 func pick_random_direction() -> void:
