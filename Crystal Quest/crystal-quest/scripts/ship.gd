@@ -7,6 +7,8 @@ extends CharacterBody2D
 const DEADZONE : float = 10.0
 const MISSILE_OFFSET : int = 32
 
+@onready var shoot_sound: AudioStreamPlayer2D = $ShootSound
+
 var missile_countdown : float = 0
 
 func _process(delta: float) -> void:
@@ -24,6 +26,7 @@ func _process(delta: float) -> void:
 		
 		get_parent().add_child(new_missile)
 		missile_countdown = min_time_between_missiles
+		shoot_sound.play()
 
 func _physics_process(delta: float) -> void:
 	var mouse_pos : Vector2 = get_viewport().get_mouse_position()

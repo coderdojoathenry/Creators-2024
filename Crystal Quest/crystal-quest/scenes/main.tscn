@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://daj431lewf2ne"]
+[gd_scene load_steps=18 format=3 uid="uid://daj431lewf2ne"]
 
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_6go2g"]
 [ext_resource type="Script" path="res://scripts/ship.gd" id="1_p8vr1"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c2toyy7jieoqg" path="res://scenes/missile.tscn" id="4_dg4gl"]
 [ext_resource type="Texture2D" uid="uid://c4t2nk0wjvdub" path="res://textures/ememy0.png" id="6_2a22y"]
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="6_ti4pd"]
+[ext_resource type="AudioStream" uid="uid://crdag7fipsvy3" path="res://audio/414886__matrixxx__retro-laser-shot-02.wav" id="6_ys2yv"]
 [ext_resource type="Texture2D" uid="uid://citvsogba4b83" path="res://icon.svg" id="9_g4srl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5wkk7"]
@@ -67,6 +68,9 @@ shape = SubResource("CircleShape2D_5wkk7")
 
 [node name="Sprite2D" type="Sprite2D" parent="Ship"]
 texture = ExtResource("2_cubkv")
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="Ship"]
+stream = ExtResource("6_ys2yv")
 
 [node name="Top Wall" type="StaticBody2D" parent="."]
 position = Vector2(576, 60)
