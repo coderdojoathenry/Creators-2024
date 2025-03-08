@@ -36,3 +36,10 @@ func _physics_process(delta: float) -> void:
 		velocity = Vector2.ZERO
 
 	move_and_slide()
+	
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		var collision_obj = collision.get_collider() as CollisionObject2D
+		if (collision_obj && \
+			collision_obj.get_collision_layer_value(2) == false):
+			%GameManager.inform_body_entered(self)

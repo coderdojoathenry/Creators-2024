@@ -6,8 +6,8 @@
 [ext_resource type="Script" path="res://scripts/mouse_hider.gd" id="3_2qat4"]
 [ext_resource type="PackedScene" uid="uid://c2toyy7jieoqg" path="res://scenes/missile.tscn" id="4_dg4gl"]
 [ext_resource type="Texture2D" uid="uid://c4t2nk0wjvdub" path="res://textures/ememy0.png" id="6_2a22y"]
-[ext_resource type="Script" path="res://scripts/border.gd" id="7_6hxjk"]
-[ext_resource type="Script" path="res://scripts/mover.gd" id="7_wwbeg"]
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="6_ti4pd"]
+[ext_resource type="Texture2D" uid="uid://citvsogba4b83" path="res://icon.svg" id="9_g4srl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5wkk7"]
 radius = 16.0
@@ -43,12 +43,8 @@ animations = [{
 "speed": 2.0
 }]
 
-[sub_resource type="Resource" id="Resource_dbprg"]
-script = ExtResource("7_6hxjk")
-Top = 80
-Bottom = 20
-Left = 20
-Right = 20
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_en04x"]
+size = Vector2(100, 100)
 
 [node name="Main" type="Node2D"]
 
@@ -62,6 +58,7 @@ script = ExtResource("3_2qat4")
 
 [node name="Ship" type="CharacterBody2D" parent="."]
 position = Vector2(576, 324)
+collision_mask = 14
 script = ExtResource("1_p8vr1")
 missile_scene = ExtResource("4_dg4gl")
 
@@ -73,30 +70,42 @@ texture = ExtResource("2_cubkv")
 
 [node name="Top Wall" type="StaticBody2D" parent="."]
 position = Vector2(576, 60)
+collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Top Wall"]
 shape = SubResource("RectangleShape2D_1kds1")
 
 [node name="Bottom Wall" type="StaticBody2D" parent="."]
 position = Vector2(576, 648)
+collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bottom Wall"]
 shape = SubResource("RectangleShape2D_1kds1")
 
 [node name="Left Wall" type="StaticBody2D" parent="."]
 position = Vector2(0, 359)
+collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Left Wall"]
 shape = SubResource("RectangleShape2D_igmsx")
 
 [node name="Right Wall" type="StaticBody2D" parent="."]
 position = Vector2(1152, 359)
+collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Right Wall"]
 shape = SubResource("RectangleShape2D_igmsx")
 
-[node name="Enemy0" type="Area2D" parent="."]
+[node name="Enemy0" type="AnimatableBody2D" parent="."]
 position = Vector2(75, 349)
+collision_layer = 8
+collision_mask = 3
+sync_to_physics = false
+script = ExtResource("6_ti4pd")
+direction = Vector2(1, 0)
+speed = 50.0
+wander_time_min = 1.0
+wander_time_max = 3.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy0"]
 shape = SubResource("RectangleShape2D_d3l7h")
@@ -106,10 +115,13 @@ sprite_frames = SubResource("SpriteFrames_28nxh")
 autoplay = "default"
 frame_progress = 0.019718
 
-[node name="Mover" type="Node2D" parent="Enemy0"]
-script = ExtResource("7_wwbeg")
-direction = Vector2(1, 0)
-speed = 200.0
-wander_time_min = 1.0
-wander_time_max = 3.0
-border = SubResource("Resource_dbprg")
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(577, 438)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_en04x")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("9_g4srl")
