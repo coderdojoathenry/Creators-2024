@@ -7,6 +7,8 @@
 size = Vector2(16, 16)
 
 [node name="Missile" type="Area2D"]
+collision_layer = 16
+collision_mask = 8
 script = ExtResource("1_7l2mq")
 direction = Vector2(0, -1)
 speed = 250.0
@@ -22,4 +24,5 @@ wait_time = 3.0
 one_shot = true
 autostart = true
 
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

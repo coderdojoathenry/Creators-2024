@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://cnvo8rj3jjag"]
+
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_w2j4u"]
+[ext_resource type="Texture2D" uid="uid://dvmqqh3i5def4" path="res://textures/enemy_1.png" id="2_cjdpo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d3l7h"]
+size = Vector2(32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qatml"]
+atlas = ExtResource("2_cjdpo")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rc32f"]
+atlas = ExtResource("2_cjdpo")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_28nxh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qatml")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rc32f")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[node name="Enemy1" type="AnimatableBody2D"]
+collision_layer = 8
+collision_mask = 3
+sync_to_physics = false
+script = ExtResource("1_w2j4u")
+direction = Vector2(1, 0)
+speed = 200.0
+wander_time_min = 0.1
+wander_time_max = 1.0
+persuit_percentage = 0.8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_d3l7h")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_28nxh")
+autoplay = "default"
+frame_progress = 0.019718
