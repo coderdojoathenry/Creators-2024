@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://bmffrg4pn40r4"]
+
+[ext_resource type="Script" path="res://scripts/ship.gd" id="1_4kel8"]
+[ext_resource type="PackedScene" uid="uid://c2toyy7jieoqg" path="res://scenes/missile.tscn" id="2_m40nw"]
+[ext_resource type="Texture2D" uid="uid://cgaemfwu7ygfw" path="res://textures/ship.png" id="3_cqjq2"]
+[ext_resource type="AudioStream" uid="uid://crdag7fipsvy3" path="res://audio/414886__matrixxx__retro-laser-shot-02.wav" id="4_3raj8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5wkk7"]
+radius = 16.0
+
+[node name="Ship" type="CharacterBody2D"]
+position = Vector2(576, 324)
+collision_mask = 14
+script = ExtResource("1_4kel8")
+missile_scene = ExtResource("2_m40nw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_5wkk7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_cqjq2")
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_3raj8")

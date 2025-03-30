@@ -4,14 +4,19 @@ extends AnimatableBody2D
 @export var speed : float
 @export var wander_time_min : float
 @export var wander_time_max : float
+@export var score : int = 100
+@export var persuit_percent : float = 0
 
 var vp_rect : Rect2
 var wander_change_dir_time : float
+
+@onready var game_manager: GameManager = %GameManager
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	vp_rect = get_viewport_rect() 
 	set_wander_change_dir_time()
+	tree_exiting.connect(_on_tree_exiting)
 
 func set_wander_change_dir_time() -> void:
 	wander_change_dir_time = randf_range(wander_time_min, wander_time_max)
@@ -21,7 +26,7 @@ func _process(delta: float) -> void:
 	wander_change_dir_time -= delta
 	
 	if (wander_change_dir_time < 0):
-		pick_random_direction()
+		pick_direction()
 		set_wander_change_dir_time()
 	
 func _physics_process(delta: float) -> void:
@@ -41,8 +46,18 @@ func _physics_process(delta: float) -> void:
 			direction.y = -1
 	
 
+func pick_direction() -> void:
+	if (randf() < persuit_percent && game_manager.ship != null):
+		direction = game_manager.ship.position - position
+		direction = direction.normalized()
+	else:
+		pick_random_direction()
+
 func pick_random_direction() -> void:
 	direction = Vector2.ZERO
 	while (direction == Vector2.ZERO):
 		direction.x = randi_range(-1, 1)
 		direction.y = randi_range(-1, 1)
+
+func _on_tree_exiting() -> void:
+	game_manager.increase_score(score)
