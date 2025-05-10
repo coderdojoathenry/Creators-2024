@@ -1,10 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://daj431lewf2ne"]
+[gd_scene load_steps=12 format=3 uid="uid://daj431lewf2ne"]
 
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_6go2g"]
 [ext_resource type="Script" path="res://scripts/mouse_hider.gd" id="3_2qat4"]
 [ext_resource type="PackedScene" uid="uid://bmffrg4pn40r4" path="res://scenes/ship.tscn" id="3_bj7hq"]
 [ext_resource type="PackedScene" uid="uid://yqqh8la3a4uo" path="res://scenes/enemy_0.tscn" id="4_ls1u0"]
+[ext_resource type="PackedScene" uid="uid://cnhet5km6cuyx" path="res://scenes/enemy_spawner.tscn" id="5_5x74m"]
 [ext_resource type="PackedScene" uid="uid://0o7c4xfqflxj" path="res://scenes/enemy_1.tscn" id="5_kaim1"]
+[ext_resource type="PackedScene" uid="uid://c4xxodbajlae1" path="res://scenes/enemy_2.tscn" id="7_xfnk2"]
 [ext_resource type="Texture2D" uid="uid://citvsogba4b83" path="res://icon.svg" id="9_g4srl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1kds1"]
@@ -57,11 +59,6 @@ collision_layer = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Right Wall"]
 shape = SubResource("RectangleShape2D_igmsx")
 
-[node name="Enemy0" parent="." instance=ExtResource("4_ls1u0")]
-
-[node name="Enemy1" parent="." instance=ExtResource("5_kaim1")]
-position = Vector2(1011, 382)
-
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(577, 438)
 collision_layer = 2
@@ -79,3 +76,16 @@ offset_top = 10.0
 offset_right = 74.0
 offset_bottom = 33.0
 text = "1000000"
+
+[node name="SpawnLayer" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="EnemySpawner" parent="." node_paths=PackedStringArray("spawn_points") instance=ExtResource("5_5x74m")]
+spawn_points = [NodePath("../Base_left"), NodePath("../Base_right")]
+enemies = Array[PackedScene]([ExtResource("4_ls1u0"), ExtResource("5_kaim1"), ExtResource("7_xfnk2")])
+
+[node name="Base_left" type="Node2D" parent="."]
+position = Vector2(50, 360)
+
+[node name="Base_right" type="Node2D" parent="."]
+position = Vector2(1102, 360)

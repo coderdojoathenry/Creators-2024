@@ -4,6 +4,12 @@ class_name GameManager extends Node2D
 @export var score : int = 0
 @export var score_label : Label
 
+@onready var spawn_layer = %SpawnLayer
+
+func _ready() -> void:
+	GlobalObjects.GameManager = self
+	GlobalObjects.SpawnLayer = spawn_layer
+
 func _process(delta: float) -> void:
 	if (score_label):
 		score_label.text = str(score)

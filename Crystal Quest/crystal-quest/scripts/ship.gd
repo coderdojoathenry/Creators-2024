@@ -24,7 +24,7 @@ func _process(delta: float) -> void:
 		new_missile.position = position + \
 							   new_missile.direction * MISSILE_OFFSET
 		
-		get_parent().add_child(new_missile)
+		GlobalObjects.SpawnLayer.add_child(new_missile)
 		missile_countdown = min_time_between_missiles
 		shoot_sound.play()
 
@@ -45,4 +45,4 @@ func _physics_process(delta: float) -> void:
 		var collision_obj = collision.get_collider() as CollisionObject2D
 		if (collision_obj && \
 			collision_obj.get_collision_layer_value(2) == false):
-			%GameManager.inform_body_entered(self)
+			GlobalObjects.GameManager.inform_body_entered(self)
