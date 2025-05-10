@@ -79,3 +79,6 @@ offset_top = 10.0
 offset_right = 74.0
 offset_bottom = 33.0
 text = "1000000"
+
+[node name="ProjectileLayer" type="Node2D" parent="."]
+unique_name_in_owner = true
