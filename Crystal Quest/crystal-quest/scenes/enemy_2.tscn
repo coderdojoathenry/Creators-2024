@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=3 uid="uid://ddj08t3yxs0y6"]
+
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_82d0y"]
+[ext_resource type="Texture2D" uid="uid://bxgtep3brnolj" path="res://textures/enemy_2.png" id="2_fqj15"]
+[ext_resource type="Script" path="res://scripts/bomb_dropper.gd" id="3_1wwoj"]
+[ext_resource type="PackedScene" uid="uid://yqkq4dp7eg4k" path="res://scenes/mine.tscn" id="4_juptr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d3l7h"]
+size = Vector2(32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v1ums"]
+atlas = ExtResource("2_fqj15")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vl057"]
+atlas = ExtResource("2_fqj15")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6nedg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v1ums")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vl057")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Enemy2" type="AnimatableBody2D"]
+collision_layer = 8
+collision_mask = 3
+sync_to_physics = false
+script = ExtResource("1_82d0y")
+direction = Vector2(1, 0)
+speed = 30.0
+wander_time_min = 1.0
+wander_time_max = 3.0
+score = 300
+persuit_percent = 0.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_d3l7h")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_6nedg")
+autoplay = "default"
+
+[node name="BombDropper" type="Node2D" parent="."]
+script = ExtResource("3_1wwoj")
+bomb = ExtResource("4_juptr")
+min_time = 2.0
+max_time = 10.0

@@ -10,8 +10,6 @@ extends AnimatableBody2D
 var vp_rect : Rect2
 var wander_change_dir_time : float
 
-@onready var game_manager: GameManager = %GameManager
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	vp_rect = get_viewport_rect() 
@@ -30,8 +28,7 @@ func _process(delta: float) -> void:
 		set_wander_change_dir_time()
 	
 func _physics_process(delta: float) -> void:
-	global_position += direction.normalized() * speed * delta
-	var collision = move_and_collide(direction)
+	var collision = move_and_collide(direction.normalized() * speed * delta)
 	if (collision):
 		var collision_pos = collision.get_position()
 		
@@ -47,8 +44,8 @@ func _physics_process(delta: float) -> void:
 	
 
 func pick_direction() -> void:
-	if (randf() < persuit_percent && game_manager.ship != null):
-		direction = game_manager.ship.position - position
+	if (randf() < persuit_percent && GlobalObjects.GameManager.ship != null):
+		direction = GlobalObjects.GameManager.ship.position - position
 		direction = direction.normalized()
 	else:
 		pick_random_direction()
@@ -60,4 +57,4 @@ func pick_random_direction() -> void:
 		direction.y = randi_range(-1, 1)
 
 func _on_tree_exiting() -> void:
-	game_manager.increase_score(score)
+	GlobalObjects.GameManager.increase_score(score)
