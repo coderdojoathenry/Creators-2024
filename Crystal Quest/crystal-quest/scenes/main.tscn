@@ -10,10 +10,10 @@
 [ext_resource type="Texture2D" uid="uid://citvsogba4b83" path="res://icon.svg" id="9_g4srl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1kds1"]
-size = Vector2(1152, 10)
+size = Vector2(640, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_igmsx"]
-size = Vector2(10, 588)
+size = Vector2(10, 420)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_en04x"]
 size = Vector2(100, 100)
@@ -30,37 +30,40 @@ score_label = NodePath("../ScoreLabel")
 script = ExtResource("3_2qat4")
 
 [node name="Ship" parent="." instance=ExtResource("3_bj7hq")]
+position = Vector2(306, 168)
 
 [node name="Top Wall" type="StaticBody2D" parent="."]
-position = Vector2(576, 60)
+position = Vector2(320, 60)
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Top Wall"]
 shape = SubResource("RectangleShape2D_1kds1")
 
 [node name="Bottom Wall" type="StaticBody2D" parent="."]
-position = Vector2(576, 648)
+position = Vector2(320, 480)
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bottom Wall"]
 shape = SubResource("RectangleShape2D_1kds1")
 
 [node name="Left Wall" type="StaticBody2D" parent="."]
-position = Vector2(0, 359)
+position = Vector2(0, 269)
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Left Wall"]
+position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_igmsx")
 
 [node name="Right Wall" type="StaticBody2D" parent="."]
-position = Vector2(1152, 359)
+position = Vector2(640, 269)
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Right Wall"]
+position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_igmsx")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(577, 438)
+position = Vector2(310, 283)
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
@@ -85,7 +88,7 @@ spawn_points = [NodePath("../Base_left"), NodePath("../Base_right")]
 enemies = Array[PackedScene]([ExtResource("4_ls1u0"), ExtResource("5_kaim1"), ExtResource("7_68di7")])
 
 [node name="Base_left" type="Node2D" parent="."]
-position = Vector2(50, 360)
+position = Vector2(50, 268)
 
 [node name="Base_right" type="Node2D" parent="."]
-position = Vector2(1102, 360)
+position = Vector2(604, 269)
