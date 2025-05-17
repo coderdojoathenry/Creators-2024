@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://daj431lewf2ne"]
+[gd_scene load_steps=13 format=3 uid="uid://daj431lewf2ne"]
 
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_6go2g"]
+[ext_resource type="PackedScene" uid="uid://cj2euh1ghqi1d" path="res://scenes/explosion_effect.tscn" id="2_kbk5b"]
 [ext_resource type="Script" path="res://scripts/mouse_hider.gd" id="3_2qat4"]
 [ext_resource type="PackedScene" uid="uid://bmffrg4pn40r4" path="res://scenes/ship.tscn" id="3_bj7hq"]
 [ext_resource type="PackedScene" uid="uid://yqqh8la3a4uo" path="res://scenes/enemy_0.tscn" id="4_ls1u0"]
@@ -25,6 +26,10 @@ unique_name_in_owner = true
 script = ExtResource("1_6go2g")
 ship = NodePath("../Ship")
 score_label = NodePath("../ScoreLabel")
+explosion_effect = ExtResource("2_kbk5b")
+
+[node name="RespawnTimer" type="Timer" parent="GameManager"]
+one_shot = true
 
 [node name="MouseHider" type="Node2D" parent="."]
 script = ExtResource("3_2qat4")
@@ -89,3 +94,5 @@ position = Vector2(50, 360)
 
 [node name="Base_right" type="Node2D" parent="."]
 position = Vector2(1102, 360)
+
+[connection signal="timeout" from="GameManager/RespawnTimer" to="GameManager" method="_on_respawn_timer_timeout"]
