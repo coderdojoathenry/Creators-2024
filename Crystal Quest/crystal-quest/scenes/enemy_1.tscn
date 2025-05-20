@@ -38,7 +38,7 @@ speed = 150.0
 wander_time_min = 0.1
 wander_time_max = 0.1
 score = 200
-persuit_percent = 1.0
+persuit_percent = 0.9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_d3l7h")

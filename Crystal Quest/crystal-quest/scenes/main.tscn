@@ -1,91 +1,187 @@
-[gd_scene load_steps=12 format=3 uid="uid://daj431lewf2ne"]
+[gd_scene load_steps=16 format=3 uid="uid://daj431lewf2ne"]
 
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_6go2g"]
+[ext_resource type="FontFile" uid="uid://yqk0bun3i5ev" path="res://Fonts/ds_digital/DS-DIGIB.TTF" id="1_emw55"]
+[ext_resource type="PackedScene" uid="uid://n13glkf6hrkj" path="res://scenes/explosion_effect_2.tscn" id="2_ejfd4"]
 [ext_resource type="Script" path="res://scripts/mouse_hider.gd" id="3_2qat4"]
 [ext_resource type="PackedScene" uid="uid://bmffrg4pn40r4" path="res://scenes/ship.tscn" id="3_bj7hq"]
 [ext_resource type="PackedScene" uid="uid://yqqh8la3a4uo" path="res://scenes/enemy_0.tscn" id="4_ls1u0"]
+[ext_resource type="AudioStream" uid="uid://bl0ba64b81u5e" path="res://audio/explosion-6-340463.mp3" id="5_8kpdn"]
 [ext_resource type="PackedScene" uid="uid://0o7c4xfqflxj" path="res://scenes/enemy_1.tscn" id="5_kaim1"]
 [ext_resource type="PackedScene" uid="uid://b6s6w51k8i7xf" path="res://scenes/enemy_spawner.tscn" id="5_n5k65"]
+[ext_resource type="Script" path="res://scenes/spawn_layer.gd" id="7_1mpyu"]
 [ext_resource type="PackedScene" uid="uid://ddj08t3yxs0y6" path="res://scenes/enemy_2.tscn" id="7_68di7"]
-[ext_resource type="Texture2D" uid="uid://citvsogba4b83" path="res://icon.svg" id="9_g4srl"]
+[ext_resource type="Texture2D" uid="uid://cgaemfwu7ygfw" path="res://textures/ship.png" id="10_1oh8u"]
+[ext_resource type="PackedScene" uid="uid://dgplcyhfwdbsp" path="res://scenes/base.tscn" id="13_3m1ym"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1kds1"]
-size = Vector2(1152, 10)
+size = Vector2(800, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_igmsx"]
-size = Vector2(10, 588)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_en04x"]
-size = Vector2(100, 100)
+size = Vector2(10, 540)
 
 [node name="Main" type="Node2D"]
 
-[node name="GameManager" type="Node2D" parent="." node_paths=PackedStringArray("ship", "score_label")]
+[node name="UI Background" type="ColorRect" parent="."]
+offset_right = 800.0
+offset_bottom = 600.0
+color = Color(0.343524, 0.390194, 0.417598, 1)
+
+[node name="GameOverLabel" type="Label" parent="UI Background"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -228.0
+offset_top = -57.5
+offset_right = 228.0
+offset_bottom = 57.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 84
+text = "Game Over"
+
+[node name="Score Area" type="ColorRect" parent="UI Background"]
+layout_mode = 0
+offset_top = -1.0
+offset_right = 800.0
+offset_bottom = 59.0
+color = Color(0.469039, 0.39686, 0.314732, 1)
+
+[node name="ScoreLabel" type="Label" parent="UI Background/Score Area"]
+layout_mode = 0
+offset_left = 29.0
+offset_top = 12.0
+offset_right = 232.0
+offset_bottom = 45.0
+theme_override_fonts/font = ExtResource("1_emw55")
+theme_override_font_sizes/font_size = 32
+text = "Score: 1000000"
+
+[node name="Life Display" type="Control" parent="UI Background/Score Area"]
+anchors_preset = 0
+offset_top = 1.0
+offset_right = 40.0
+offset_bottom = 41.0
+
+[node name="Life0" type="TextureRect" parent="UI Background/Score Area/Life Display"]
+modulate = Color(0.975584, 0.847913, 0.814872, 1)
+layout_mode = 0
+offset_left = 758.0
+offset_top = 10.0
+offset_right = 790.0
+offset_bottom = 42.0
+texture = ExtResource("10_1oh8u")
+expand_mode = 3
+
+[node name="Life1" type="TextureRect" parent="UI Background/Score Area/Life Display"]
+modulate = Color(0.975584, 0.847913, 0.814872, 1)
+layout_mode = 0
+offset_left = 716.0
+offset_top = 10.0
+offset_right = 748.0
+offset_bottom = 42.0
+texture = ExtResource("10_1oh8u")
+expand_mode = 3
+
+[node name="Life2" type="TextureRect" parent="UI Background/Score Area/Life Display"]
+modulate = Color(0.975584, 0.847913, 0.814872, 1)
+layout_mode = 0
+offset_left = 674.0
+offset_top = 10.0
+offset_right = 706.0
+offset_bottom = 42.0
+texture = ExtResource("10_1oh8u")
+expand_mode = 3
+
+[node name="Life3" type="TextureRect" parent="UI Background/Score Area/Life Display"]
+modulate = Color(0.975584, 0.847913, 0.814872, 1)
+layout_mode = 0
+offset_left = 632.0
+offset_top = 10.0
+offset_right = 664.0
+offset_bottom = 42.0
+texture = ExtResource("10_1oh8u")
+expand_mode = 3
+
+[node name="Life4" type="TextureRect" parent="UI Background/Score Area/Life Display"]
+modulate = Color(0.975584, 0.847913, 0.814872, 1)
+layout_mode = 0
+offset_left = 590.0
+offset_top = 10.0
+offset_right = 622.0
+offset_bottom = 42.0
+texture = ExtResource("10_1oh8u")
+expand_mode = 3
+
+[node name="GameManager" type="Node2D" parent="." node_paths=PackedStringArray("ship", "score_label", "game_over_label", "life_icons")]
 unique_name_in_owner = true
 script = ExtResource("1_6go2g")
 ship = NodePath("../Ship")
-score_label = NodePath("../ScoreLabel")
+score_label = NodePath("../UI Background/Score Area/ScoreLabel")
+game_over_label = NodePath("../UI Background/GameOverLabel")
+explosion_effect = ExtResource("2_ejfd4")
+life_icons = [NodePath("../UI Background/Score Area/Life Display/Life0"), NodePath("../UI Background/Score Area/Life Display/Life1"), NodePath("../UI Background/Score Area/Life Display/Life2"), NodePath("../UI Background/Score Area/Life Display/Life3"), NodePath("../UI Background/Score Area/Life Display/Life4")]
+
+[node name="RespawnTimer" type="Timer" parent="GameManager"]
+one_shot = true
+
+[node name="DestroySound" type="AudioStreamPlayer2D" parent="GameManager"]
+stream = ExtResource("5_8kpdn")
 
 [node name="MouseHider" type="Node2D" parent="."]
 script = ExtResource("3_2qat4")
 
+[node name="Walls" type="Node2D" parent="."]
+
+[node name="Top Wall" type="StaticBody2D" parent="Walls"]
+position = Vector2(400, 60)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Top Wall"]
+shape = SubResource("RectangleShape2D_1kds1")
+
+[node name="Bottom Wall" type="StaticBody2D" parent="Walls"]
+position = Vector2(400, 600)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Bottom Wall"]
+shape = SubResource("RectangleShape2D_1kds1")
+
+[node name="Left Wall" type="StaticBody2D" parent="Walls"]
+position = Vector2(0, 330)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Left Wall"]
+shape = SubResource("RectangleShape2D_igmsx")
+
+[node name="Right Wall" type="StaticBody2D" parent="Walls"]
+position = Vector2(800, 330)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Right Wall"]
+shape = SubResource("RectangleShape2D_igmsx")
+
 [node name="Ship" parent="." instance=ExtResource("3_bj7hq")]
-
-[node name="Top Wall" type="StaticBody2D" parent="."]
-position = Vector2(576, 60)
-collision_layer = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Top Wall"]
-shape = SubResource("RectangleShape2D_1kds1")
-
-[node name="Bottom Wall" type="StaticBody2D" parent="."]
-position = Vector2(576, 648)
-collision_layer = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Bottom Wall"]
-shape = SubResource("RectangleShape2D_1kds1")
-
-[node name="Left Wall" type="StaticBody2D" parent="."]
-position = Vector2(0, 359)
-collision_layer = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Left Wall"]
-shape = SubResource("RectangleShape2D_igmsx")
-
-[node name="Right Wall" type="StaticBody2D" parent="."]
-position = Vector2(1152, 359)
-collision_layer = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Right Wall"]
-shape = SubResource("RectangleShape2D_igmsx")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(577, 438)
-collision_layer = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-shape = SubResource("RectangleShape2D_en04x")
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("9_g4srl")
-
-[node name="ScoreLabel" type="Label" parent="."]
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 74.0
-offset_bottom = 33.0
-text = "1000000"
+position = Vector2(392, 324)
+speed_by_distance = 8.0
+min_time_between_missiles = 0.25
 
 [node name="SpawnLayer" type="Node2D" parent="."]
 unique_name_in_owner = true
+script = ExtResource("7_1mpyu")
 
 [node name="EnemySpawner" parent="." node_paths=PackedStringArray("spawn_points") instance=ExtResource("5_n5k65")]
 spawn_points = [NodePath("../Base_left"), NodePath("../Base_right")]
 enemies = Array[PackedScene]([ExtResource("4_ls1u0"), ExtResource("5_kaim1"), ExtResource("7_68di7")])
 
-[node name="Base_left" type="Node2D" parent="."]
-position = Vector2(50, 360)
+[node name="Base_left" parent="." instance=ExtResource("13_3m1ym")]
 
-[node name="Base_right" type="Node2D" parent="."]
-position = Vector2(1102, 360)
+[node name="Base_right" parent="." instance=ExtResource("13_3m1ym")]
+position = Vector2(761, 362)
+rotation = 3.14159
+
+[connection signal="timeout" from="GameManager/RespawnTimer" to="GameManager" method="_on_respawn_timer_timeout"]

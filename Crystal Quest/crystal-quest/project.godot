@@ -19,6 +19,14 @@ config/icon="res://icon.svg"
 
 GlobalObjects="*res://scripts/global_objects.gd"
 
+[display]
+
+window/size/viewport_width=800
+window/size/viewport_height=600
+window/size/mode=2
+window/stretch/mode="viewport"
+window/dpi/allow_hidpi=false
+
 [input]
 
 Shoot={
