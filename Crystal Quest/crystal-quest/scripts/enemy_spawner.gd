@@ -1,16 +1,18 @@
 extends Node2D
 
-@export var spawn_points : Array[Node2D]
 @export var enemies : Array[PackedScene]
 @export var max_enemies : int = 4
 @export var min_time : float = 2
 @export var max_time : float = 10
 
 var next_spawn_time : float
+var spawn_points : Array[Node2D]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	GlobalObjects.reset_play_area.connect(on_reset_play_area)
+	spawn_points.append(GlobalObjects.BaseLeft)
+	spawn_points.append(GlobalObjects.BaseRight)
 
 func on_reset_play_area() -> void:
 	for child in get_children():

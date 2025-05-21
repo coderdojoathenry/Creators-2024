@@ -11,7 +11,7 @@ const MISSILE_OFFSET : int = 32
 @onready var destroy_sound: AudioStreamPlayer2D = $DestroySound
 
 var missile_countdown : float = 0
-var last_non_zero_dir : Vector2
+var last_non_zero_dir : Vector2 = Vector2.RIGHT
 
 func _process(delta: float) -> void:
 	missile_countdown -= delta
@@ -21,7 +21,7 @@ func _process(delta: float) -> void:
 
 		new_missile.direction = velocity.normalized()
 		if (new_missile.direction == Vector2.ZERO):
-			new_missile.direction = Vector2.RIGHT
+			new_missile.direction = last_non_zero_dir
 			
 		new_missile.position = position + \
 							   new_missile.direction * MISSILE_OFFSET
@@ -37,6 +37,7 @@ func _physics_process(delta: float) -> void:
 
 	if (distance > DEADZONE):
 		velocity = ship_to_mouse * speed_by_distance
+		last_non_zero_dir = velocity.normalized()
 	else:
 		velocity = Vector2.ZERO
 

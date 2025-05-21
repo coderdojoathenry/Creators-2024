@@ -1,18 +1,16 @@
-[gd_scene load_steps=16 format=3 uid="uid://daj431lewf2ne"]
+[gd_scene load_steps=14 format=3 uid="uid://daj431lewf2ne"]
 
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_6go2g"]
 [ext_resource type="FontFile" uid="uid://yqk0bun3i5ev" path="res://Fonts/ds_digital/DS-DIGIB.TTF" id="1_emw55"]
-[ext_resource type="PackedScene" uid="uid://n13glkf6hrkj" path="res://scenes/explosion_effect_2.tscn" id="2_ejfd4"]
+[ext_resource type="PackedScene" path="res://scenes/explosion_effect_2.tscn" id="2_ejfd4"]
 [ext_resource type="Script" path="res://scripts/mouse_hider.gd" id="3_2qat4"]
 [ext_resource type="PackedScene" uid="uid://bmffrg4pn40r4" path="res://scenes/ship.tscn" id="3_bj7hq"]
-[ext_resource type="PackedScene" uid="uid://yqqh8la3a4uo" path="res://scenes/enemy_0.tscn" id="4_ls1u0"]
 [ext_resource type="AudioStream" uid="uid://bl0ba64b81u5e" path="res://audio/explosion-6-340463.mp3" id="5_8kpdn"]
-[ext_resource type="PackedScene" uid="uid://0o7c4xfqflxj" path="res://scenes/enemy_1.tscn" id="5_kaim1"]
-[ext_resource type="PackedScene" uid="uid://b6s6w51k8i7xf" path="res://scenes/enemy_spawner.tscn" id="5_n5k65"]
+[ext_resource type="AudioStream" uid="uid://cechx1y6tqk8e" path="res://audio/coin-collect-retro-8-bit-sound-effect-145251.mp3" id="6_rto0x"]
 [ext_resource type="Script" path="res://scenes/spawn_layer.gd" id="7_1mpyu"]
-[ext_resource type="PackedScene" uid="uid://ddj08t3yxs0y6" path="res://scenes/enemy_2.tscn" id="7_68di7"]
 [ext_resource type="Texture2D" uid="uid://cgaemfwu7ygfw" path="res://textures/ship.png" id="10_1oh8u"]
-[ext_resource type="PackedScene" uid="uid://dgplcyhfwdbsp" path="res://scenes/base.tscn" id="13_3m1ym"]
+[ext_resource type="PackedScene" uid="uid://dvdmnc01eblcw" path="res://scenes/level0.tscn" id="10_rhqli"]
+[ext_resource type="PackedScene" path="res://scenes/base.tscn" id="13_3m1ym"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1kds1"]
 size = Vector2(800, 10)
@@ -132,6 +130,9 @@ one_shot = true
 [node name="DestroySound" type="AudioStreamPlayer2D" parent="GameManager"]
 stream = ExtResource("5_8kpdn")
 
+[node name="CollectSound" type="AudioStreamPlayer2D" parent="GameManager"]
+stream = ExtResource("6_rto0x")
+
 [node name="MouseHider" type="Node2D" parent="."]
 script = ExtResource("3_2qat4")
 
@@ -174,14 +175,12 @@ min_time_between_missiles = 0.25
 unique_name_in_owner = true
 script = ExtResource("7_1mpyu")
 
-[node name="EnemySpawner" parent="." node_paths=PackedStringArray("spawn_points") instance=ExtResource("5_n5k65")]
-spawn_points = [NodePath("../Base_left"), NodePath("../Base_right")]
-enemies = Array[PackedScene]([ExtResource("4_ls1u0"), ExtResource("5_kaim1"), ExtResource("7_68di7")])
-
 [node name="Base_left" parent="." instance=ExtResource("13_3m1ym")]
 
 [node name="Base_right" parent="." instance=ExtResource("13_3m1ym")]
 position = Vector2(761, 362)
 rotation = 3.14159
+
+[node name="Level" parent="." instance=ExtResource("10_rhqli")]
 
 [connection signal="timeout" from="GameManager/RespawnTimer" to="GameManager" method="_on_respawn_timer_timeout"]

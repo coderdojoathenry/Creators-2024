@@ -11,6 +11,9 @@ class_name GameManager extends Node2D
 @onready var spawn_layer: Node2D = %SpawnLayer
 @onready var respawn_timer: Timer = $RespawnTimer
 @onready var destroy_sound: AudioStreamPlayer2D = $DestroySound
+@onready var collect_sound: AudioStreamPlayer2D = $CollectSound
+@onready var base_left : Node2D = $"../Base_left"
+@onready var base_right : Node2D = $"../Base_right"
 
 var ship_initial_position : Vector2
 var explosion_instance : Node2D
@@ -21,6 +24,10 @@ var ship_destroyed : bool = false
 func _ready() -> void:
 	GlobalObjects.GameManager = self
 	GlobalObjects.SpawnLayer = spawn_layer
+	GlobalObjects.BaseLeft = base_left
+	GlobalObjects.BaseRight = base_right
+	
+	GlobalObjects.crystals_cleared.connect(_on_level_cleared)
 	
 	if (ship):
 		ship_initial_position = ship.global_position
@@ -56,6 +63,10 @@ func inform_body_entered(body) -> void:
 func increase_score(amount : int) -> void:
 	score = score + amount
 
+func collect(amount : int) -> void:
+	increase_score(amount)
+	collect_sound.play()
+
 func increase_lives() -> void:
 	if (lives < max_lives):
 		lives += 1
@@ -68,3 +79,6 @@ func _on_respawn_timer_timeout() -> void:
 		ship_destroyed = false
 	else:
 		game_over_label.show()
+
+func _on_level_cleared() -> void:
+	print_debug("Level cleared")

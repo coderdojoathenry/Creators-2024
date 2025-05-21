@@ -9,5 +9,5 @@ func _process(delta: float) -> void:
 	pass
 
 func _on_body_entered(body : Node2D) -> void:
-	GlobalObjects.GameManager.increase_score(1000)
+	GlobalObjects.GameManager.collect(1000)
 	queue_free()
