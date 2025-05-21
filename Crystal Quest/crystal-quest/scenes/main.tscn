@@ -1,16 +1,17 @@
-[gd_scene load_steps=14 format=3 uid="uid://daj431lewf2ne"]
+[gd_scene load_steps=15 format=3 uid="uid://daj431lewf2ne"]
 
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_6go2g"]
 [ext_resource type="FontFile" uid="uid://yqk0bun3i5ev" path="res://Fonts/ds_digital/DS-DIGIB.TTF" id="1_emw55"]
-[ext_resource type="PackedScene" path="res://scenes/explosion_effect_2.tscn" id="2_ejfd4"]
+[ext_resource type="PackedScene" uid="uid://n13glkf6hrkj" path="res://scenes/explosion_effect_2.tscn" id="2_ejfd4"]
 [ext_resource type="Script" path="res://scripts/mouse_hider.gd" id="3_2qat4"]
 [ext_resource type="PackedScene" uid="uid://bmffrg4pn40r4" path="res://scenes/ship.tscn" id="3_bj7hq"]
 [ext_resource type="AudioStream" uid="uid://bl0ba64b81u5e" path="res://audio/explosion-6-340463.mp3" id="5_8kpdn"]
 [ext_resource type="AudioStream" uid="uid://cechx1y6tqk8e" path="res://audio/coin-collect-retro-8-bit-sound-effect-145251.mp3" id="6_rto0x"]
 [ext_resource type="Script" path="res://scenes/spawn_layer.gd" id="7_1mpyu"]
 [ext_resource type="Texture2D" uid="uid://cgaemfwu7ygfw" path="res://textures/ship.png" id="10_1oh8u"]
+[ext_resource type="PackedScene" uid="uid://wnlwhp3331hj" path="res://scenes/gate.tscn" id="10_i6dk5"]
 [ext_resource type="PackedScene" uid="uid://dvdmnc01eblcw" path="res://scenes/level0.tscn" id="10_rhqli"]
-[ext_resource type="PackedScene" path="res://scenes/base.tscn" id="13_3m1ym"]
+[ext_resource type="PackedScene" uid="uid://dgplcyhfwdbsp" path="res://scenes/base.tscn" id="13_3m1ym"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1kds1"]
 size = Vector2(800, 10)
@@ -136,50 +137,55 @@ stream = ExtResource("6_rto0x")
 [node name="MouseHider" type="Node2D" parent="."]
 script = ExtResource("3_2qat4")
 
-[node name="Walls" type="Node2D" parent="."]
+[node name="Environment" type="Node2D" parent="."]
 
-[node name="Top Wall" type="StaticBody2D" parent="Walls"]
+[node name="Walls" type="Node2D" parent="Environment"]
+
+[node name="Top Wall" type="StaticBody2D" parent="Environment/Walls"]
 position = Vector2(400, 60)
 collision_layer = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Top Wall"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Walls/Top Wall"]
 shape = SubResource("RectangleShape2D_1kds1")
 
-[node name="Bottom Wall" type="StaticBody2D" parent="Walls"]
+[node name="Bottom Wall" type="StaticBody2D" parent="Environment/Walls"]
 position = Vector2(400, 600)
 collision_layer = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Bottom Wall"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Walls/Bottom Wall"]
 shape = SubResource("RectangleShape2D_1kds1")
 
-[node name="Left Wall" type="StaticBody2D" parent="Walls"]
+[node name="Left Wall" type="StaticBody2D" parent="Environment/Walls"]
 position = Vector2(0, 330)
 collision_layer = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Left Wall"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Walls/Left Wall"]
 shape = SubResource("RectangleShape2D_igmsx")
 
-[node name="Right Wall" type="StaticBody2D" parent="Walls"]
+[node name="Right Wall" type="StaticBody2D" parent="Environment/Walls"]
 position = Vector2(800, 330)
 collision_layer = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Right Wall"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Walls/Right Wall"]
 shape = SubResource("RectangleShape2D_igmsx")
+
+[node name="SpawnLayer" type="Node2D" parent="Environment"]
+unique_name_in_owner = true
+script = ExtResource("7_1mpyu")
+
+[node name="Base_left" parent="Environment" instance=ExtResource("13_3m1ym")]
+
+[node name="Base_right" parent="Environment" instance=ExtResource("13_3m1ym")]
+position = Vector2(761, 362)
+rotation = 3.14159
+
+[node name="Gate" parent="Environment" instance=ExtResource("10_i6dk5")]
+position = Vector2(400, 600)
 
 [node name="Ship" parent="." instance=ExtResource("3_bj7hq")]
 position = Vector2(392, 324)
 speed_by_distance = 8.0
 min_time_between_missiles = 0.25
-
-[node name="SpawnLayer" type="Node2D" parent="."]
-unique_name_in_owner = true
-script = ExtResource("7_1mpyu")
-
-[node name="Base_left" parent="." instance=ExtResource("13_3m1ym")]
-
-[node name="Base_right" parent="." instance=ExtResource("13_3m1ym")]
-position = Vector2(761, 362)
-rotation = 3.14159
 
 [node name="Level" parent="." instance=ExtResource("10_rhqli")]
 

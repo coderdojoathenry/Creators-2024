@@ -12,8 +12,8 @@ class_name GameManager extends Node2D
 @onready var respawn_timer: Timer = $RespawnTimer
 @onready var destroy_sound: AudioStreamPlayer2D = $DestroySound
 @onready var collect_sound: AudioStreamPlayer2D = $CollectSound
-@onready var base_left : Node2D = $"../Base_left"
-@onready var base_right : Node2D = $"../Base_right"
+@onready var base_left : Node2D = $"../Environment/Base_left"
+@onready var base_right : Node2D = $"../Environment/Base_right"
 
 var ship_initial_position : Vector2
 var explosion_instance : Node2D
@@ -82,3 +82,6 @@ func _on_respawn_timer_timeout() -> void:
 
 func _on_level_cleared() -> void:
 	print_debug("Level cleared")
+
+func level_exited() -> void:
+	print_debug("Level exited")

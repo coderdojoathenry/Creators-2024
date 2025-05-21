@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=3 uid="uid://wnlwhp3331hj"]
+
+[ext_resource type="Script" path="res://scripts/gate.gd" id="1_o3fei"]
+[ext_resource type="Texture2D" uid="uid://jol7cqex4ijy" path="res://textures/Exit_side.png" id="2_ihga0"]
+[ext_resource type="Texture2D" uid="uid://8o733g7867ki" path="res://textures/Exit_middle.png" id="3_ot47c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fs41h"]
+size = Vector2(64, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xfyx2"]
+size = Vector2(64, 50)
+
+[node name="Gate" type="Node2D"]
+script = ExtResource("1_o3fei")
+
+[node name="GateLeft" type="StaticBody2D" parent="."]
+position = Vector2(-64, -32)
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GateLeft"]
+shape = SubResource("RectangleShape2D_fs41h")
+
+[node name="Sprite2D" type="Sprite2D" parent="GateLeft"]
+texture = ExtResource("2_ihga0")
+
+[node name="GateRight" type="StaticBody2D" parent="."]
+position = Vector2(64, -32)
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GateRight"]
+shape = SubResource("RectangleShape2D_fs41h")
+
+[node name="Sprite2D" type="Sprite2D" parent="GateRight"]
+scale = Vector2(-1, 1)
+texture = ExtResource("2_ihga0")
+
+[node name="GateMiddle" type="StaticBody2D" parent="."]
+position = Vector2(0, -32)
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GateMiddle"]
+shape = SubResource("RectangleShape2D_fs41h")
+
+[node name="Sprite2D" type="Sprite2D" parent="GateMiddle"]
+scale = Vector2(-1, 1)
+texture = ExtResource("3_ot47c")
+
+[node name="Exit" type="Area2D" parent="."]
+position = Vector2(0, -32)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exit"]
+shape = SubResource("RectangleShape2D_xfyx2")
