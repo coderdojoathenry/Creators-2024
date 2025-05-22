@@ -1,17 +1,23 @@
-[gd_scene load_steps=15 format=3 uid="uid://daj431lewf2ne"]
+[gd_scene load_steps=21 format=3 uid="uid://daj431lewf2ne"]
 
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_6go2g"]
 [ext_resource type="FontFile" uid="uid://yqk0bun3i5ev" path="res://Fonts/ds_digital/DS-DIGIB.TTF" id="1_emw55"]
+[ext_resource type="FontFile" uid="uid://sv6rei57ub46" path="res://Fonts/ds_digital/DS-DIGIT.TTF" id="1_mhft4"]
 [ext_resource type="PackedScene" uid="uid://n13glkf6hrkj" path="res://scenes/explosion_effect_2.tscn" id="2_ejfd4"]
 [ext_resource type="Script" path="res://scripts/mouse_hider.gd" id="3_2qat4"]
 [ext_resource type="PackedScene" uid="uid://bmffrg4pn40r4" path="res://scenes/ship.tscn" id="3_bj7hq"]
 [ext_resource type="AudioStream" uid="uid://bl0ba64b81u5e" path="res://audio/explosion-6-340463.mp3" id="5_8kpdn"]
 [ext_resource type="AudioStream" uid="uid://cechx1y6tqk8e" path="res://audio/coin-collect-retro-8-bit-sound-effect-145251.mp3" id="6_rto0x"]
 [ext_resource type="Script" path="res://scenes/spawn_layer.gd" id="7_1mpyu"]
+[ext_resource type="PackedScene" uid="uid://goas2cfqbuki" path="res://scenes/Levels/level1.tscn" id="7_06h1q"]
+[ext_resource type="PackedScene" uid="uid://b8wd6n1pmf3ls" path="res://scenes/Levels/level2.tscn" id="8_36nvx"]
+[ext_resource type="PackedScene" uid="uid://cmgnwcebtvbi7" path="res://scenes/Levels/level3.tscn" id="9_sat8c"]
 [ext_resource type="Texture2D" uid="uid://cgaemfwu7ygfw" path="res://textures/ship.png" id="10_1oh8u"]
+[ext_resource type="PackedScene" uid="uid://tn3ih7d7xde5" path="res://scenes/Levels/level4.tscn" id="10_gsgsm"]
 [ext_resource type="PackedScene" uid="uid://wnlwhp3331hj" path="res://scenes/gate.tscn" id="10_i6dk5"]
-[ext_resource type="PackedScene" uid="uid://dvdmnc01eblcw" path="res://scenes/level0.tscn" id="10_rhqli"]
+[ext_resource type="PackedScene" uid="uid://dvdmnc01eblcw" path="res://scenes/Levels/level0.tscn" id="10_rhqli"]
 [ext_resource type="PackedScene" uid="uid://dgplcyhfwdbsp" path="res://scenes/base.tscn" id="13_3m1ym"]
+[ext_resource type="AudioStream" uid="uid://cwvyo82a8r723" path="res://audio/winning-82808.mp3" id="13_i762m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1kds1"]
 size = Vector2(800, 10)
@@ -40,8 +46,31 @@ offset_right = 228.0
 offset_bottom = 57.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_mhft4")
 theme_override_font_sizes/font_size = 84
 text = "Game Over"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BonusSpeedLabel" type="Label" parent="UI Background"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -228.0
+offset_top = -57.5
+offset_right = 228.0
+offset_bottom = 57.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_mhft4")
+theme_override_font_sizes/font_size = 64
+text = "Speed Bonus!"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Score Area" type="ColorRect" parent="UI Background"]
 layout_mode = 0
@@ -116,7 +145,7 @@ offset_bottom = 42.0
 texture = ExtResource("10_1oh8u")
 expand_mode = 3
 
-[node name="GameManager" type="Node2D" parent="." node_paths=PackedStringArray("ship", "score_label", "game_over_label", "life_icons")]
+[node name="GameManager" type="Node2D" parent="." node_paths=PackedStringArray("ship", "score_label", "game_over_label", "life_icons", "bonus_speed_label")]
 unique_name_in_owner = true
 script = ExtResource("1_6go2g")
 ship = NodePath("../Ship")
@@ -124,8 +153,13 @@ score_label = NodePath("../UI Background/Score Area/ScoreLabel")
 game_over_label = NodePath("../UI Background/GameOverLabel")
 explosion_effect = ExtResource("2_ejfd4")
 life_icons = [NodePath("../UI Background/Score Area/Life Display/Life0"), NodePath("../UI Background/Score Area/Life Display/Life1"), NodePath("../UI Background/Score Area/Life Display/Life2"), NodePath("../UI Background/Score Area/Life Display/Life3"), NodePath("../UI Background/Score Area/Life Display/Life4")]
+levels = Array[PackedScene]([ExtResource("10_rhqli"), ExtResource("7_06h1q"), ExtResource("8_36nvx"), ExtResource("9_sat8c"), ExtResource("10_gsgsm")])
+bonus_speed_label = NodePath("../UI Background/BonusSpeedLabel")
 
 [node name="RespawnTimer" type="Timer" parent="GameManager"]
+one_shot = true
+
+[node name="NextLevelTimer" type="Timer" parent="GameManager"]
 one_shot = true
 
 [node name="DestroySound" type="AudioStreamPlayer2D" parent="GameManager"]
@@ -133,6 +167,9 @@ stream = ExtResource("5_8kpdn")
 
 [node name="CollectSound" type="AudioStreamPlayer2D" parent="GameManager"]
 stream = ExtResource("6_rto0x")
+
+[node name="SuccessSound" type="AudioStreamPlayer2D" parent="GameManager"]
+stream = ExtResource("13_i762m")
 
 [node name="MouseHider" type="Node2D" parent="."]
 script = ExtResource("3_2qat4")
@@ -184,9 +221,9 @@ position = Vector2(400, 600)
 
 [node name="Ship" parent="." instance=ExtResource("3_bj7hq")]
 position = Vector2(392, 324)
+collision_mask = 78
 speed_by_distance = 8.0
 min_time_between_missiles = 0.25
 
-[node name="Level" parent="." instance=ExtResource("10_rhqli")]
-
 [connection signal="timeout" from="GameManager/RespawnTimer" to="GameManager" method="_on_respawn_timer_timeout"]
+[connection signal="timeout" from="GameManager/NextLevelTimer" to="GameManager" method="_on_next_level_timer_timeout"]

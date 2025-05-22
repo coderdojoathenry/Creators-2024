@@ -1,0 +1,71 @@
+[gd_scene load_steps=7 format=3 uid="uid://tn3ih7d7xde5"]
+
+[ext_resource type="Script" path="res://scripts/level.gd" id="1_8buhs"]
+[ext_resource type="PackedScene" uid="uid://b6s6w51k8i7xf" path="res://scenes/enemy_spawner.tscn" id="2_xeo7r"]
+[ext_resource type="PackedScene" uid="uid://yqqh8la3a4uo" path="res://scenes/enemy_0.tscn" id="3_b61du"]
+[ext_resource type="PackedScene" uid="uid://dn13wcp7ixpi5" path="res://scenes/crystal.tscn" id="4_2gomu"]
+[ext_resource type="PackedScene" uid="uid://0o7c4xfqflxj" path="res://scenes/enemy_1.tscn" id="4_tfr6q"]
+[ext_resource type="PackedScene" uid="uid://ddj08t3yxs0y6" path="res://scenes/enemy_2.tscn" id="5_7lvyh"]
+
+[node name="Level0" type="Node2D"]
+script = ExtResource("1_8buhs")
+bonus_time = 7.0
+
+[node name="EnemySpawner" parent="." instance=ExtResource("2_xeo7r")]
+enemies = Array[PackedScene]([ExtResource("3_b61du"), ExtResource("4_tfr6q"), ExtResource("5_7lvyh")])
+max_enemies = 8
+min_time = 0.5
+max_time = 5.0
+
+[node name="Crystals" type="Node2D" parent="."]
+
+[node name="Crystal" parent="Crystals" instance=ExtResource("4_2gomu")]
+position = Vector2(78, 130)
+
+[node name="Crystal2" parent="Crystals" instance=ExtResource("4_2gomu")]
+position = Vector2(172, 189)
+
+[node name="Crystal3" parent="Crystals" instance=ExtResource("4_2gomu")]
+position = Vector2(275, 156)
+
+[node name="Crystal4" parent="Crystals" instance=ExtResource("4_2gomu")]
+position = Vector2(58, 513)
+
+[node name="Crystal5" parent="Crystals" instance=ExtResource("4_2gomu")]
+position = Vector2(180, 543)
+
+[node name="Crystal6" parent="Crystals" instance=ExtResource("4_2gomu")]
+position = Vector2(220, 413)
+
+[node name="Crystal7" parent="Crystals" instance=ExtResource("4_2gomu")]
+position = Vector2(358, 239)
+
+[node name="Crystal8" parent="Crystals" instance=ExtResource("4_2gomu")]
+position = Vector2(171, 307)
+
+[node name="Crystal9" parent="Crystals" instance=ExtResource("4_2gomu")]
+position = Vector2(364, 387)
+
+[node name="Crystal10" parent="Crystals" instance=ExtResource("4_2gomu")]
+position = Vector2(497, 328)
+
+[node name="Crystal11" parent="Crystals" instance=ExtResource("4_2gomu")]
+position = Vector2(476, 106)
+
+[node name="Crystal12" parent="Crystals" instance=ExtResource("4_2gomu")]
+position = Vector2(595, 196)
+
+[node name="Crystal13" parent="Crystals" instance=ExtResource("4_2gomu")]
+position = Vector2(656, 364)
+
+[node name="Crystal14" parent="Crystals" instance=ExtResource("4_2gomu")]
+position = Vector2(687, 231)
+
+[node name="Crystal15" parent="Crystals" instance=ExtResource("4_2gomu")]
+position = Vector2(716, 514)
+
+[node name="Crystal16" parent="Crystals" instance=ExtResource("4_2gomu")]
+position = Vector2(567, 506)
+
+[node name="Crystal17" parent="Crystals" instance=ExtResource("4_2gomu")]
+position = Vector2(507, 436)

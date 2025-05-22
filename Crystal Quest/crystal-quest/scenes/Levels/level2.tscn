@@ -1,0 +1,61 @@
+[gd_scene load_steps=6 format=3 uid="uid://b8wd6n1pmf3ls"]
+
+[ext_resource type="Script" path="res://scripts/level.gd" id="1_tqonl"]
+[ext_resource type="PackedScene" uid="uid://b6s6w51k8i7xf" path="res://scenes/enemy_spawner.tscn" id="2_owsaf"]
+[ext_resource type="PackedScene" uid="uid://yqqh8la3a4uo" path="res://scenes/enemy_0.tscn" id="3_065qd"]
+[ext_resource type="PackedScene" uid="uid://ddj08t3yxs0y6" path="res://scenes/enemy_2.tscn" id="4_3s5ka"]
+[ext_resource type="PackedScene" uid="uid://dn13wcp7ixpi5" path="res://scenes/crystal.tscn" id="4_iml46"]
+
+[node name="Level2" type="Node2D"]
+script = ExtResource("1_tqonl")
+bonus_time = 5.0
+
+[node name="EnemySpawner" parent="." instance=ExtResource("2_owsaf")]
+enemies = Array[PackedScene]([ExtResource("3_065qd"), ExtResource("4_3s5ka")])
+max_enemies = 6
+min_time = 0.5
+max_time = 5.0
+
+[node name="Crystals" type="Node2D" parent="."]
+
+[node name="Crystal" parent="Crystals" instance=ExtResource("4_iml46")]
+position = Vector2(108, 268)
+
+[node name="Crystal2" parent="Crystals" instance=ExtResource("4_iml46")]
+position = Vector2(159, 205)
+
+[node name="Crystal3" parent="Crystals" instance=ExtResource("4_iml46")]
+position = Vector2(197, 306)
+
+[node name="Crystal4" parent="Crystals" instance=ExtResource("4_iml46")]
+position = Vector2(305, 234)
+
+[node name="Crystal5" parent="Crystals" instance=ExtResource("4_iml46")]
+position = Vector2(352, 393)
+
+[node name="Crystal6" parent="Crystals" instance=ExtResource("4_iml46")]
+position = Vector2(150, 375)
+
+[node name="Crystal7" parent="Crystals" instance=ExtResource("4_iml46")]
+position = Vector2(192, 468)
+
+[node name="Crystal8" parent="Crystals" instance=ExtResource("4_iml46")]
+position = Vector2(387, 223)
+
+[node name="Crystal9" parent="Crystals" instance=ExtResource("4_iml46")]
+position = Vector2(523, 463)
+
+[node name="Crystal10" parent="Crystals" instance=ExtResource("4_iml46")]
+position = Vector2(518, 327)
+
+[node name="Crystal11" parent="Crystals" instance=ExtResource("4_iml46")]
+position = Vector2(407, 313)
+
+[node name="Crystal12" parent="Crystals" instance=ExtResource("4_iml46")]
+position = Vector2(719, 511)
+
+[node name="Crystal13" parent="Crystals" instance=ExtResource("4_iml46")]
+position = Vector2(649, 308)
+
+[node name="Crystal14" parent="Crystals" instance=ExtResource("4_iml46")]
+position = Vector2(612, 197)

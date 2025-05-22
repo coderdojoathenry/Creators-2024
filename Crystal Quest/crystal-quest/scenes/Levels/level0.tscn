@@ -1,17 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://dvdmnc01eblcw"]
+[gd_scene load_steps=5 format=3 uid="uid://dvdmnc01eblcw"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_kma0i"]
 [ext_resource type="PackedScene" uid="uid://dn13wcp7ixpi5" path="res://scenes/crystal.tscn" id="2_kqqbg"]
 [ext_resource type="PackedScene" uid="uid://b6s6w51k8i7xf" path="res://scenes/enemy_spawner.tscn" id="2_qjpt5"]
 [ext_resource type="PackedScene" uid="uid://yqqh8la3a4uo" path="res://scenes/enemy_0.tscn" id="3_06lro"]
-[ext_resource type="PackedScene" uid="uid://0o7c4xfqflxj" path="res://scenes/enemy_1.tscn" id="4_m3lrv"]
-[ext_resource type="PackedScene" uid="uid://ddj08t3yxs0y6" path="res://scenes/enemy_2.tscn" id="5_pascg"]
 
-[node name="Level" type="Node2D"]
+[node name="Level0" type="Node2D"]
 script = ExtResource("1_kma0i")
 
 [node name="EnemySpawner" parent="." instance=ExtResource("2_qjpt5")]
-enemies = Array[PackedScene]([ExtResource("3_06lro"), ExtResource("4_m3lrv"), ExtResource("5_pascg")])
+enemies = Array[PackedScene]([ExtResource("3_06lro")])
+min_time = 0.5
+max_time = 5.0
 
 [node name="Crystals" type="Node2D" parent="."]
 

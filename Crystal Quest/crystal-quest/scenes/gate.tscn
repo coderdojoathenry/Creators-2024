@@ -15,7 +15,7 @@ script = ExtResource("1_o3fei")
 
 [node name="GateLeft" type="StaticBody2D" parent="."]
 position = Vector2(-64, -32)
-collision_layer = 8
+collision_layer = 64
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GateLeft"]
 shape = SubResource("RectangleShape2D_fs41h")
@@ -25,7 +25,7 @@ texture = ExtResource("2_ihga0")
 
 [node name="GateRight" type="StaticBody2D" parent="."]
 position = Vector2(64, -32)
-collision_layer = 8
+collision_layer = 64
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GateRight"]
 shape = SubResource("RectangleShape2D_fs41h")
@@ -36,7 +36,7 @@ texture = ExtResource("2_ihga0")
 
 [node name="GateMiddle" type="StaticBody2D" parent="."]
 position = Vector2(0, -32)
-collision_layer = 8
+collision_layer = 64
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GateMiddle"]
 shape = SubResource("RectangleShape2D_fs41h")
