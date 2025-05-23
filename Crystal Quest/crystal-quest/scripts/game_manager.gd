@@ -9,6 +9,7 @@ class_name GameManager extends Node2D
 @export var life_icons : Array[Control]
 @export var levels : Array[PackedScene]
 @export var bonus_speed_label: Label
+@export var level_load_delay : float = 4.0
 
 @onready var spawn_layer: Node2D = %SpawnLayer
 @onready var respawn_timer: Timer = $RespawnTimer
@@ -92,17 +93,19 @@ func _on_level_cleared() -> void:
 	print_debug("Level cleared")
 
 func level_exited() -> void:
-	get_parent().remove_child(ship)
-	ship_destroyed = true
-	if (current_level.bonus_time > 0.0):
-		increase_score(50000)
-		bonus_speed_label.show()
-	next_level_timer.start(4)
-	GlobalObjects.reset_play_area.emit()
-	success_sound.play()
+	if (ship_destroyed == false):
+		get_parent().remove_child(ship)
+		ship_destroyed = true
+		if (current_level.bonus_time > 0.0):
+			increase_score(50000)
+			bonus_speed_label.show()
+		GlobalObjects.reset_play_area.emit()
+		success_sound.play()
+		next_level_timer.start(level_load_delay)
 	
 func load_next_level() -> void:
 	if (current_level != null):
+		remove_child(current_level)
 		current_level.queue_free()
 	level_number += 1
 	var effective_level = level_number % levels.size()
