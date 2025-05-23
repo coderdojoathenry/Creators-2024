@@ -14,6 +14,7 @@ func _process(delta: float) -> void:
 	pass
 	
 func _on_exit_entered(body : Node2D) -> void:
+	print("_on_exit_entered " + str(body.global_position))
 	GlobalObjects.GameManager.level_exited()
 	
 func _on_reset_play_area() -> void:

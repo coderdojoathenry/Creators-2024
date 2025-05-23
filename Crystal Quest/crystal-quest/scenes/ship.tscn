@@ -9,7 +9,6 @@
 radius = 16.0
 
 [node name="Ship" type="CharacterBody2D"]
-position = Vector2(576, 324)
 collision_mask = 14
 script = ExtResource("1_4kel8")
 missile_scene = ExtResource("2_m40nw")

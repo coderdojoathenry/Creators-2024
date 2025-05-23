@@ -27,6 +27,7 @@ var lives : int = 3
 var ship_destroyed : bool = false
 var level_number : int = -1
 var current_level : Level
+var ignore_next_level_exited : bool = false
 
 func _ready() -> void:
 	GlobalObjects.GameManager = self
@@ -60,6 +61,7 @@ func update_life_icons() -> void:
 
 func inform_body_entered(body) -> void:
 	if (body == ship && ship_destroyed == false):
+		ship.global_position = ship_initial_position
 		get_parent().remove_child(ship)
 		ship_destroyed = true
 		destroy_sound.play()
@@ -83,7 +85,6 @@ func increase_lives() -> void:
 func _on_respawn_timer_timeout() -> void:
 	if (lives > 0):
 		GlobalObjects.reset_play_area.emit()
-		ship.global_position = ship_initial_position
 		get_parent().add_child(ship)
 		ship_destroyed = false
 	else:
@@ -93,17 +94,27 @@ func _on_level_cleared() -> void:
 	print_debug("Level cleared")
 
 func level_exited() -> void:
+	if (ignore_next_level_exited == true):
+		ignore_next_level_exited = false
+		return
+	else:
+		ignore_next_level_exited = true
+	
+	print("level_exited start")
 	if (ship_destroyed == false):
+		print("level_exited condition")
 		get_parent().remove_child(ship)
 		ship_destroyed = true
-		if (current_level.bonus_time > 0.0):
-			increase_score(50000)
-			bonus_speed_label.show()
 		GlobalObjects.reset_play_area.emit()
+		if (current_level.bonus_time > 0.0):
+			bonus_speed_label.show()
+			increase_score(50000)
 		success_sound.play()
 		next_level_timer.start(level_load_delay)
+	print("level_exited end")
 	
 func load_next_level() -> void:
+	print("load_next_level start")
 	if (current_level != null):
 		remove_child(current_level)
 		current_level.queue_free()
@@ -111,11 +122,13 @@ func load_next_level() -> void:
 	var effective_level = level_number % levels.size()
 	current_level = levels[effective_level].instantiate() as Level
 	add_child(current_level)
-
+	print("load_next_level end")
 
 func _on_next_level_timer_timeout() -> void:
+	print("_on_next_level_timer_timeout start")
 	bonus_speed_label.hide()
-	load_next_level()
 	ship.global_position = ship_initial_position
 	get_parent().add_child(ship)
 	ship_destroyed = false
+	load_next_level()
+	print("_on_next_level_timer_timeout end")

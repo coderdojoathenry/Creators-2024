@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_6go2g"]
 [ext_resource type="FontFile" uid="uid://yqk0bun3i5ev" path="res://Fonts/ds_digital/DS-DIGIB.TTF" id="1_emw55"]
 [ext_resource type="FontFile" uid="uid://sv6rei57ub46" path="res://Fonts/ds_digital/DS-DIGIT.TTF" id="1_mhft4"]
-[ext_resource type="PackedScene" path="res://scenes/explosion_effect_2.tscn" id="2_ejfd4"]
+[ext_resource type="PackedScene" uid="uid://n13glkf6hrkj" path="res://scenes/explosion_effect_2.tscn" id="2_ejfd4"]
 [ext_resource type="Script" path="res://scripts/mouse_hider.gd" id="3_2qat4"]
 [ext_resource type="PackedScene" uid="uid://bmffrg4pn40r4" path="res://scenes/ship.tscn" id="3_bj7hq"]
 [ext_resource type="AudioStream" uid="uid://bl0ba64b81u5e" path="res://audio/explosion-6-340463.mp3" id="5_8kpdn"]
@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://tn3ih7d7xde5" path="res://scenes/Levels/level4.tscn" id="10_gsgsm"]
 [ext_resource type="PackedScene" uid="uid://wnlwhp3331hj" path="res://scenes/gate.tscn" id="10_i6dk5"]
 [ext_resource type="PackedScene" uid="uid://dvdmnc01eblcw" path="res://scenes/Levels/level0.tscn" id="10_rhqli"]
-[ext_resource type="PackedScene" path="res://scenes/base.tscn" id="13_3m1ym"]
+[ext_resource type="PackedScene" uid="uid://dgplcyhfwdbsp" path="res://scenes/base.tscn" id="13_3m1ym"]
 [ext_resource type="AudioStream" uid="uid://cwvyo82a8r723" path="res://audio/winning-82808.mp3" id="13_i762m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1kds1"]
