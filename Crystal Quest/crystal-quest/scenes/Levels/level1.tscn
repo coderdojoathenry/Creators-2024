@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_34mub"]
 [ext_resource type="PackedScene" uid="uid://b6s6w51k8i7xf" path="res://scenes/enemy_spawner.tscn" id="2_82y3u"]
 [ext_resource type="PackedScene" uid="uid://0o7c4xfqflxj" path="res://scenes/enemy_1.tscn" id="3_5x7dq"]
-[ext_resource type="PackedScene" uid="uid://b8wd6n1pmf3ls" path="res://scenes/Levels/level2.tscn" id="4_i8brw"]
+[ext_resource type="PackedScene" uid="uid://ddj08t3yxs0y6" path="res://scenes/enemy_2.tscn" id="4_73sbs"]
 [ext_resource type="PackedScene" uid="uid://dn13wcp7ixpi5" path="res://scenes/crystal.tscn" id="4_kbs67"]
 
 [node name="Level1" type="Node2D"]
@@ -11,7 +11,7 @@ script = ExtResource("1_34mub")
 bonus_time = 5.0
 
 [node name="EnemySpawner" parent="." instance=ExtResource("2_82y3u")]
-enemies = Array[PackedScene]([ExtResource("3_5x7dq"), ExtResource("4_i8brw")])
+enemies = Array[PackedScene]([ExtResource("3_5x7dq"), ExtResource("4_73sbs")])
 max_enemies = 5
 min_time = 0.5
 max_time = 5.0

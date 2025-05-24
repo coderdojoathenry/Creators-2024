@@ -61,7 +61,6 @@ func update_life_icons() -> void:
 
 func inform_body_entered(body) -> void:
 	if (body == ship && ship_destroyed == false):
-		ship.global_position = ship_initial_position
 		get_parent().remove_child(ship)
 		ship_destroyed = true
 		destroy_sound.play()
@@ -82,9 +81,15 @@ func increase_lives() -> void:
 	if (lives < max_lives):
 		lives += 1
 
+func recentre_mouse() -> void:
+	var window_size = DisplayServer.window_get_size()
+	Input.warp_mouse(window_size/2)
+
 func _on_respawn_timer_timeout() -> void:
 	if (lives > 0):
 		GlobalObjects.reset_play_area.emit()
+		Input.warp_mouse(ship_initial_position)
+		ship.global_position = ship_initial_position
 		get_parent().add_child(ship)
 		ship_destroyed = false
 	else:
@@ -104,6 +109,7 @@ func level_exited() -> void:
 	if (ship_destroyed == false):
 		print("level_exited condition")
 		get_parent().remove_child(ship)
+		recentre_mouse()
 		ship_destroyed = true
 		GlobalObjects.reset_play_area.emit()
 		if (current_level.bonus_time > 0.0):
